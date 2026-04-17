@@ -49,13 +49,22 @@
         }
 
         function UserInfo() {
-            return ;
+            return (
+                <div>
+                    <NameCard />    
+                    <AgeCard />    
+                    <PhoneCard />    
+                    <EmailCard />    
+                </div>
+            );
         }
 
         function App() {
             return (
                 <>
-                
+                    <UserInfo user={user1} />
+                    <UserInfo user={user2} />
+                    <UserInfo user={user3} />
                 </>
             )
         }
