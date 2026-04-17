@@ -15,15 +15,15 @@
 
         const { useState, useEffect } = React;
 
-        function  TimePrinter() {
+        function TimePrinter() {
 
-            const [time, setTime] = useState(new Date().toLocaleTimeString());
+            const [time, setTime] = useState(new Date().toLocaleTimeString()); 
 
             console.log('렌더링...')
 
             useEffect(
                 () => { console.log('useEffect 동작')}, // 수행할 동작 - 콜백 함수
-                []  // 의존성 배열을 빈 배열로 설정하면 업데이트 시점에는 동작하지 않는다.
+                [] // 의존성 배열을 빈 배열로 설정하면 업데이트 시점에는 동작하지 않는다.
             )
 
             return (
@@ -33,7 +33,6 @@
                 </>
             )
         }
-
 
         ReactDOM.createRoot(document.getElementById('root')).render(<TimePrinter/>);
 
