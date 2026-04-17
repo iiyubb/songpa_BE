@@ -13,24 +13,18 @@
 
     <script type="text/babel">
 
-        const fruits = [
-            {id:1, fruit: '사과'},
-            {id:2, fruit: '포도'},
-            {id:3, fruit: '파인애플'}
-        ];
+        const fruits = ['사과', '바나나', '포도', '오렌지'];
 
         function FruitList() {
             return (
-                <>
+                <div>
                     <h2>과일 목록</h2>
                     <ul>
-                        {fruits.map(fruit => (
-                            <li>
-                                {fruit.fruit}
-                            </li>
+                        {fruits.map((fruit, index) => (
+                            <li key={index}>{fruit}</li>
                         ))}
                     </ul>
-                </>
+                </div>
             );
         }
 
