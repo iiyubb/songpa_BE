@@ -41,12 +41,19 @@
                         const data = await response.json();
                         
                         const detailPromises = data.results.map(pokemon => 
-                            fetch(pokemon.url).then(res => res.json())
+                            fetch(pokemon.url).then(res => {
+                                if (!res.ok) throw new Error('정보를 가져올 수 없습니다.');
+                                return res.json()
+                            })
                         );
-                        const detailedPokemons = await Promise.all(detailPromises);
+                        const detailedPokemons = await Promise.all(detailPromises); // 순서가 보장됨. 하나라도 실패하면 전체가 실패로 처리됨
+                        /* 참고: Promise.all()은 배열 안 Promise 중 하나라도 reject 되면 전체가 reject 됨 
+                                일부가 실패해도 나머지는 계속 처리하고 싶다면 Promise.addSettled() 사용 */
                         
                         setPokemons(detailedPokemons);
+
                     } catch (error) {
+                        console.error(error);
                         setError(error);
                     } finally {
                         setLoading(false);
@@ -59,10 +66,22 @@
             if (error) return <p>오류가 발생했습니다: {error.message}</p>;
 
             return (
-                <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px'}}>
-                    {pokemons.map(pokemon => <Item key={pokemon.id} pokemon={pokemon} />)}
-                </div>
+                <>
+                    {pokemons.map(pokemon => <Card key={pokemon.id} pokemon={pokemon}/>)}
+                </>
             );
+        }
+
+        function Card({pokemon}) {
+            return (
+                <div className='card'>
+                    <img src={pokemon.sprites.other.dream_world.front_default} alt={pokemon.name}/>
+                    <div className='info'>
+                        <h2>No. {pokemon.id}</h2>
+                        <h3>name: {pokemon.name}</h3>
+                    </div>
+                </div>
+            )
         }
 
         function Item({pokemon}) {
