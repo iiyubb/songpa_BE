@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .item {
+            background-color: white;
+            border: 1px solid black;
+            margin: 0;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        const API_URL = 'https://pokeapi.co/api/v2/pokemon';
+
+        const {useEffect, useState} = React;
+
+        function Title() {
+            return <h1>포켓몬 목록</h1>;
+        }
+
+        function ItemList() {
+            const [pokemons, setPokemons] = useState([]);
+            const [loading, setLoading] = useState(true);
+            const [error, setError] = useState(null);
+
+            useEffect(() => {
+                async function fetchPokemons() {
+                    try {
+                        const response = await fetch(API_URL);
+                        const data = await response.json();
+                        
+                        const detailPromises = data.results.map(pokemon => 
+                            fetch(pokemon.url).then(res => res.json())
+                        );
+                        const detailedPokemons = await Promise.all(detailPromises);
+                        
+                        setPokemons(detailedPokemons);
+                    } catch (error) {
+                        setError(error);
+                    } finally {
+                        setLoading(false);
+                    }
+                }
+                fetchPokemons();
+            }, []);
+                
+            if (loading) return <p>로딩 중...</p>;
+            if (error) return <p>오류가 발생했습니다: {error.message}</p>;
+
+            return (
+                <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px'}}>
+                    {pokemons.map(pokemon => <Item key={pokemon.id} pokemon={pokemon} />)}
+                </div>
+            );
+        }
+
+        function Item({pokemon}) {
+            return (
+                <div className="item">
+                    <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
+                        <img 
+                            src={pokemon.sprites.other.dream_world.front_default} 
+                            alt={pokemon.name}
+                            width="80" height="80"
+                        />
+                        <div>
+                            <h4>No.{pokemon.id}</h4>
+                            <h4>{pokemon.name}</h4>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function App () {
+            return (
+                <>
+                    <Title />
+                    <ItemList />
+                </>
+            )
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+
+    </script>
+</body>
+</html>
