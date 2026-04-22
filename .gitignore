@@ -2,4 +2,32 @@ node_modules/
 dist/
 build/
 .env
+.env.local
+.env.*.local
+
+# macOS
 .DS_Store
+
+# Next.js 빌드 캐시
+.next/
+out/
+
+# 이미지 파일
+*.png
+*.PNG
+*.jpg
+*.JPG
+*.jpeg
+*.JPEG
+*.gif
+*.webp
+*.bmp
+*.tiff
+
+# 로그
+*.log
+npm-debug.log*
+
+# 에디터
+.vscode/
+.idea/
