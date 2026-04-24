@@ -1,33 +1,42 @@
-node_modules/
-dist/
-build/
-.env
-.env.local
-.env.*.local
-
 # macOS
 .DS_Store
 
-# Next.js 빌드 캐시
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Next.js
 .next/
 out/
+build/
+dist/
 
-# 이미지 파일
-*.png
-*.PNG
-*.jpg
-*.JPG
-*.jpeg
-*.JPEG
-*.gif
-*.webp
-*.bmp
-*.tiff
+# Next.js 빌드 산출물
+*.tsbuildinfo
+next-env.d.ts
+
+# 환경변수
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
 
 # 로그
 *.log
-npm-debug.log*
+logs/
 
-# 에디터
-.vscode/
-.idea/
+# 캐시
+.cache/
+.parcel-cache/
+
+# Windows
+Thumbs.db
