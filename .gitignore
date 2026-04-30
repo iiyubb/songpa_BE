@@ -27,6 +27,7 @@ next-env.d.ts
 # IDE
 .vscode/
 .idea/
+*.iml
 *.swp
 *.swo
 
