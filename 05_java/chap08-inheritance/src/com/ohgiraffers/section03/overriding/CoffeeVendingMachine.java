@@ -16,38 +16,38 @@ public class CoffeeVendingMachine extends VendingMachine {
     }
 
     // 메소드 이름이 다른 경우 (단순히 새로운 메서드 추가)
-    @Override
-    public String vendMachine() {
-        return "음료수";
-    }
+//    @Override
+//    public String vendMachine() {
+//        return "음료수";
+//    }
 
     // 반환 타입이 다른 경우
-    @Override
-    public int vend() {
-        return 100;
-    }
+//    @Override
+//    public int vend() {
+//        return 100;
+//    }
 
     // 매개변수(파라미터)가 다른 경우
-    @Override
-    public String vend(String type) {
-        return type;
-    }
+//    @Override
+//    public String vend(String type) {
+//        return type;
+//    }
 
     // private 메서드는 오버라이딩 할 수 없다
-    @Override
-    private void checkStock() {}
+//    @Override
+//    private void checkStock() {}
 
     // final 메서드는 '변경불가'를 의미하므로 오버라이딩 불가
-    @Override
-    public final void powerOn() {}
+//    @Override
+//    public final void powerOn() {}
 
     // protected는 가능 (에러는 오버로딩 때문)
-    @Override
-    protected void clean() {}
+//    @Override
+//    protected void clean() {}
 
     // 접근제한자는 부모보다 좁은 범위로 변경할 수 없다
-    @Override
-    void clean() {}
+//    @Override
+//    void clean() {}
 
     // 부모보다 더 넓은 범위로 변경 가능
     @Override
