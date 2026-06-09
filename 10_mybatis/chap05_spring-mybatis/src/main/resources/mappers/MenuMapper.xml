@@ -49,4 +49,29 @@
         order by category_code
     </select>
 
+    <!--    useGeneratedKeys="true": DB가 자동 생성한 key 값을 다시 받아온다
+        keyProperty="code": 받아온 key 값을 MenuDTO의 code 프로퍼티에 넣는다 -->
+    <insert id="registMenu" parameterType="com.ohgiraffers.springmybatis.menu.model.dto.MenuDto"
+            useGeneratedKeys="true" keyProperty="code">
+        insert into tbl_menu
+            (menu_name, menu_price, category_code, orderable_status)
+        values
+        ( #{ name }, #{ price }, #{ categoryCode }, #{ orderableStatus } )
+    </insert>
+
+    <update id="modifyMenu" parameterType="com.ohgiraffers.springmybatis.menu.model.dto.MenuDto">
+        update tbl_menu
+            set menu_name = #{ name }
+                , menu_price = #{ price }
+                , category_code = #{ categoryCode }
+                , orderable_status = #{ orderableStatus }
+        where menu_code = #{ code }
+    </update>
+
+    <update id="deleteMenu" parameterType="_int">
+        update tbl_menu
+            set orderable_status = 'N'
+        where menu_code = #{ menuCode }
+    </update>
+
 </mapper>

@@ -15,4 +15,10 @@ public interface MenuMapper {
     MenuDto findMenuByCode(@Param("menuCode") int menuCode);
 
     List<CategoryDto> findAllCategory();
+
+    int registMenu(MenuDto menu);
+
+    int modifyMenu(MenuDto menu);
+
+    int deleteMenu(@Param("menuCode") int menuCode);
 }
