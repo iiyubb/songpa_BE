@@ -1,8 +1,8 @@
-package com.ohgiraffers.section02.crud;
+package com.ohgiraffers.section03.entity;
 
 import jakarta.persistence.*;
 
-@Entity(name="Section02Menu")
+@Entity(name="Section03Menu")
 @Table(name="tbl_menu")
 public class Menu {
 
@@ -10,23 +10,20 @@ public class Menu {
     @Column(name = "menu_code")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int menuCode;
-
-    @Column(name = "menu_name")
+    @Column(name="menu_name")
     private String menuName;
-
-    @Column(name = "menu_price")
+    @Column(name="menu_price")
     private int menuPrice;
-
-    @Column(name = "category_code")
+    @Column(name="category_code")
     private int categoryCode;
-
-    @Column(name = "orderable_status")
+    @Column(name="orderable_status")
     private String orderableStatus;
 
     protected Menu() {
     }
 
-    public Menu(String menuName, int menuPrice, int categoryCode, String orderableStatus) {
+    public Menu(int menuCode, String menuName, int menuPrice, int categoryCode, String orderableStatus) {
+        this.menuCode = menuCode;
         this.menuName = menuName;
         this.menuPrice = menuPrice;
         this.categoryCode = categoryCode;
